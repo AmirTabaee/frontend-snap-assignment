@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Navbar from "./components/Navbar";
-import Contacts from "./components/contact/Contacts";
+import { Contacts, Navbar } from "./components";
 
 const App = () => {
+    const [loading, setLoading] = useState(true);
     const [contacts, setContacts] = useState([]);
 
     return (
         <div>
             <Navbar />
-            <Contacts contacts={contacts} />
+            <Contacts contacts={contacts} loading={loading} />
             <i class="fas fa-shopping-cart"></i>
         </div>
     );
