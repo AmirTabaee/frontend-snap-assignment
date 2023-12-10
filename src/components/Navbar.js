@@ -1,4 +1,5 @@
 import React from "react";
+import SearchContact from "./contact/SearchContact";
 
 const Navbar = () => {
     return (
@@ -7,30 +8,13 @@ const Navbar = () => {
                 <div className="row w-100">
                     <div className="col">
                         <i className="fas fa-id-badge" />
-                        وب اپلیکیشن مدیریت
-                        <span style={{ color: "purple" }}>مخاطبین</span>
+                        <span style={{ color: "purple" }}>
+                            Contacts Manager
+                        </span>{" "}
+                        Web Application
                     </div>
                     <div className="col">
-                        <div className="input-group mx-2 w-75">
-                            <span
-                                className="input-group-text"
-                                id="basic-addon1"
-                                style={{ backgroundColor: "purple" }}
-                            >
-                                <i className="fas fa-search" />
-                                <input
-                                    type="text"
-                                    style={{
-                                        backgroundColor: "gray",
-                                        borderColor: "purple",
-                                    }}
-                                    className="from-control"
-                                    placeholder="جستجو"
-                                    aria-label="Search"
-                                    aria-describedby="basic-addon1"
-                                />
-                            </span>
-                        </div>
+                        <SearchContact />
                     </div>
                 </div>
             </div>
