@@ -17,8 +17,19 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
             },
             {
+                test: /\.scss$/,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+            },
+            {
                 test: /\.(png|jpg|svg|jpeg)$/,
                 use: "asset/resource",
+            },
+            {
+                test: /\.(svg|eot|woff|woff2|ttf)$/,
+                type: "asset/resource",
+                generator: {
+                    filename: "compiled/fonts/[hash][ext][query]",
+                },
             },
         ],
     },

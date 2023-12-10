@@ -1,11 +1,11 @@
 import React from "react";
+import Navbar from "./components/Navbar";
 
 const App = () => {
     return (
         <div>
-            <h1>Hello world </h1>
-            <button className="btn btn-primary">amir</button>
-            <span className="fa fa-user"></span>
+            <Navbar />
+            <i class="fas fa-shopping-cart"></i>
         </div>
     );
 };
