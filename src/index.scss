@@ -2,3 +2,27 @@
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";
+
+body{
+    background-color:#282a36 ;
+}
+
+input[type="text"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder,
+input[type="number"]::-webkit-input-placeholder{
+    color:#f8f8f4 ;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"]{
+    color: #f8f8f4 !important;
+    background-color: #44475a !important;
+    border-color: #bd93f9 !important;
+}
+
+.form-control{
+    background-color: #44475a !important;
+    color: #f8f8f4 !important;
+    border-color: #bd93f9 !important;
+}

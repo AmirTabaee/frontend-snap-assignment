@@ -1,5 +1,7 @@
 import React from "react";
 
+import { PURPLE, COMMENT } from "../../helpers/colors";
+
 const SearchContact = () => {
     return (
         <div class="input-group">
@@ -7,8 +9,8 @@ const SearchContact = () => {
                 className="input-group-text"
                 id="basic-addon1"
                 style={{
-                    backgroundColor: "purple",
-                    borderColor: "purple",
+                    backgroundColor: PURPLE,
+                    borderColor: PURPLE,
                 }}
             >
                 <i className="fas fa-search" />
@@ -18,10 +20,10 @@ const SearchContact = () => {
                 type="text"
                 class="form-control"
                 style={{
-                    backgroundColor: "gray",
-                    borderColor: "purple",
+                    backgroundColor: COMMENT,
+                    borderColor: PURPLE,
                 }}
-                placeholder="Input group example"
+                placeholder="Search Contact"
                 aria-label="Input group example"
                 aria-describedby="btnGroupAddon"
             />
