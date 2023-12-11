@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { Spinner } from "../";
-import { CURRENTLINE, CYAN, PURPLE } from "../../helpers/colors";
+import { CURRENT_LINE, CYAN, PURPLE } from "../../helpers/colors";
 
 const ViewContact = () => {
     return (
@@ -28,7 +28,7 @@ const ViewContact = () => {
                                 className="container p-2"
                                 style={{
                                     borderRadius: "1em",
-                                    backgroundColor: CURRENTLINE,
+                                    backgroundColor: CURRENT_LINE,
                                 }}
                             >
                                 <div className="row align-items-center">
