@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Contacts, Navbar, ViewContact } from "./components";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -10,9 +10,8 @@ const App = () => {
         <div>
             <Navbar />
             <Routes>
-                <Route path="/" element={<Navigate to="/contacts" />} />
                 <Route
-                    path="/contacts"
+                    path="/"
                     element={<Contacts contacts={contacts} loading={loading} />}
                 />
                 <Route path="/contacts/:contactId" element={<ViewContact />} />
