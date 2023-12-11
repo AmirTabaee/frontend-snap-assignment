@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import { CURRENT_LINE, PURPLE } from "../../helpers/colors";
+import files from "../../helpers/files";
 
 const Contact = ({ contact }) => {
     const navigate = useNavigate();
@@ -19,7 +20,11 @@ const Contact = ({ contact }) => {
                     <div className="row align-items-center d-flex justify-content-around">
                         <div className="col-md-4 col-sm-4">
                             <img
-                                src={contact?.avatar}
+                                src={
+                                    contact?.avatar
+                                        ? contact?.avatar
+                                        : files.png.UnknownUser
+                                }
                                 alt={
                                     contact?.first_name +
                                     " " +
@@ -48,9 +53,11 @@ const Contact = ({ contact }) => {
                                 </li>
 
                                 <li className="list-group-item list-group-item-dark">
-                                    City :{"  "}
+                                    Address :{"  "}
                                     <span className="fw-bold">
-                                        {contact?.address}
+                                        {contact?.address
+                                            ? contact?.address
+                                            : "---"}
                                     </span>
                                 </li>
                             </ul>

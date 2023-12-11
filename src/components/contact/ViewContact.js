@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { Spinner } from "../";
 import { CURRENT_LINE, CYAN, PURPLE } from "../../helpers/colors";
 import { ContactApi } from "../../services/contactServices";
+import files from "../../helpers/files";
 
 const ViewContact = () => {
     const { contactId } = useParams();
@@ -53,7 +54,11 @@ const ViewContact = () => {
                             <div className="row align-items-center">
                                 <div className="col-md-3">
                                     <img
-                                        src={contactInfo?.avatar}
+                                        src={
+                                            contactInfo?.avatar
+                                                ? contactInfo?.avatar
+                                                : files.png.UnknownUser
+                                        }
                                         alt={
                                             contactInfo?.first_name +
                                             " " +
