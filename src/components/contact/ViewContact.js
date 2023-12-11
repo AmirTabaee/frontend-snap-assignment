@@ -34,8 +34,12 @@ const ViewContact = () => {
                                 <div className="row align-items-center">
                                     <div className="col-md-3">
                                         <img
-                                            src={contact?.photo}
-                                            alt=""
+                                            src={contact?.avatar}
+                                            alt={
+                                                contact?.first_name +
+                                                " " +
+                                                contact?.last_name
+                                            }
                                             className="img-fluid rounded"
                                             style={{
                                                 border: `1px solid ${PURPLE}`,
@@ -47,13 +51,21 @@ const ViewContact = () => {
                                             <li className="list-group-item list-group-item-dark">
                                                 Full name:{" "}
                                                 <span className="fw-bold">
-                                                    {contact?.fullname}
+                                                    {contact?.first_name +
+                                                        " " +
+                                                        contact?.last_name}
+                                                </span>
+                                            </li>
+                                            <li className="list-group-item list-group-item-dark">
+                                                Gender:{" "}
+                                                <span className="fw-bold">
+                                                    {contact?.gender}
                                                 </span>
                                             </li>
                                             <li className="list-group-item list-group-item-dark">
                                                 Phone number:{" "}
                                                 <span className="fw-bold">
-                                                    {contact?.mobile}
+                                                    {contact?.phone}
                                                 </span>
                                             </li>
                                             <li className="list-group-item list-group-item-dark">
@@ -63,15 +75,21 @@ const ViewContact = () => {
                                                 </span>
                                             </li>
                                             <li className="list-group-item list-group-item-dark">
-                                                job:{" "}
+                                                Telegram:{" "}
                                                 <span className="fw-bold">
-                                                    {contact?.job}
+                                                    {contact?.telegram}
                                                 </span>
                                             </li>
                                             <li className="list-group-item list-group-item-dark">
-                                                group:{" "}
+                                                Company:{" "}
                                                 <span className="fw-bold">
-                                                    {group?.name}
+                                                    {contact?.company}
+                                                </span>
+                                            </li>
+                                            <li className="list-group-item list-group-item-dark">
+                                                Address:{" "}
+                                                <span className="fw-bold">
+                                                    {contact?.address}
                                                 </span>
                                             </li>
                                         </ul>
@@ -84,7 +102,7 @@ const ViewContact = () => {
                                             className="btn"
                                             style={{ backgroundColor: PURPLE }}
                                         >
-                                            برگشت به صفحه اصلی
+                                            Back to home
                                         </Link>
                                     </div>
                                 </div>

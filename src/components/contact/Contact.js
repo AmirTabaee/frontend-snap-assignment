@@ -13,8 +13,12 @@ const Contact = ({ contact }) => {
                     <div className="row align-items-center d-flex justify-content-around">
                         <div className="col-md-4 col-sm-4">
                             <img
-                                src={contact?.photo}
-                                alt={contact?.fullname}
+                                src={contact?.avatar}
+                                alt={
+                                    contact?.first_name +
+                                    " " +
+                                    contact?.last_name
+                                }
                                 style={{ border: `1px solid ${PURPLE}` }}
                                 className="img-fluid rounded"
                             />
@@ -24,21 +28,23 @@ const Contact = ({ contact }) => {
                                 <li className="list-group-item list-group-item-dark">
                                     Full name :{"  "}
                                     <span className="fw-bold">
-                                        {contact?.fullname}
+                                        {contact?.first_name +
+                                            " " +
+                                            contact?.last_name}
                                     </span>
                                 </li>
 
                                 <li className="list-group-item list-group-item-dark">
                                     Phone number:{"  "}
                                     <span className="fw-bold">
-                                        {contact?.mobile}
+                                        {contact?.phone}
                                     </span>
                                 </li>
 
                                 <li className="list-group-item list-group-item-dark">
-                                    Email :{"  "}
+                                    City :{"  "}
                                     <span className="fw-bold">
-                                        {contact?.email}
+                                        {contact?.address}
                                     </span>
                                 </li>
                             </ul>
