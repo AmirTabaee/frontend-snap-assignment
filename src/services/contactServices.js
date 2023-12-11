@@ -8,7 +8,7 @@ const ContactApi = {
         return await http.get(`passenger?limit=${limit}&skip=${skip}`);
     },
     async getContact(contactId) {
-        return await http.get(`passenger?${contactId}`);
+        return await http.get(`passenger/${contactId}`);
     },
     async searchContact(query, limit = 30) {
         return await http.get(

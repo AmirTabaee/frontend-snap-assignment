@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CURRENT_LINE, ORANGE } from "../../helpers/colors";
 import Contact from "./Contact";
 import files from "../../helpers/files";
 import Spinner from "../Spinner";
+import { ContactApi } from "../../services/contactServices";
 
 const Contacts = ({ contacts, loading }) => {
     return (
@@ -10,7 +11,7 @@ const Contacts = ({ contacts, loading }) => {
             {loading ? (
                 <Spinner />
             ) : (
-                <section className="container">
+                <section className="container mt-4">
                     <div className="row">
                         {contacts.length > 0 ? (
                             contacts.map((item) => (
