@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+require("dotenv").config({ path: "./.env" });
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -59,6 +61,9 @@ module.exports = {
         new TerserPlugin(),
         new MiniCssExtractPlugin({
             filename: "css/style.css",
+        }),
+        new webpack.DefinePlugin({
+            "process.env": JSON.stringify(process.env),
         }),
     ],
 };

@@ -14,10 +14,7 @@ const Contacts = ({ contacts, loading }) => {
                     <div className="row">
                         {contacts.length > 0 ? (
                             contacts.map((item) => (
-                                <Contact
-                                    key={item?.id}
-                                    contact={item?.contact}
-                                />
+                                <Contact key={item?.id} contact={item} />
                             ))
                         ) : (
                             <div

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CURRENT_LINE, CYAN, ORANGE, PURPLE, RED } from "../../helpers/colors";
 
 const Contact = ({ contact }) => {
+    console.log("contact", contact);
     return (
         <div className="col-md-6">
             <div

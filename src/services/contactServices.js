@@ -1,4 +1,4 @@
-import { http } from "#/helper/http";
+import { http } from "../helpers/http";
 
 const ContactApi = {
     async getAllContacts() {

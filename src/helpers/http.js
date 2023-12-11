@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const REACT_APP_BASE_URL = process.env.BASE_URL;
+console.log("ali", REACT_APP_BASE_URL);
 
 let instance = axios.create({
     baseURL: REACT_APP_BASE_URL,

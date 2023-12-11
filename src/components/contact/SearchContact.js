@@ -4,7 +4,7 @@ import { PURPLE, COMMENT } from "../../helpers/colors";
 
 const SearchContact = () => {
     return (
-        <div class="input-group">
+        <div className="input-group">
             <span
                 className="input-group-text"
                 id="basic-addon1"
@@ -18,7 +18,7 @@ const SearchContact = () => {
 
             <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 style={{
                     backgroundColor: COMMENT,
                     borderColor: PURPLE,
