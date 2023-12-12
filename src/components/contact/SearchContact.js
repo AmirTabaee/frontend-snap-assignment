@@ -2,7 +2,7 @@ import React from "react";
 
 import { PURPLE, COMMENT } from "../../helpers/colors";
 
-const SearchContact = () => {
+const SearchContact = ({ handleSearchContact, value }) => {
     return (
         <div className="input-group">
             <span
@@ -19,6 +19,8 @@ const SearchContact = () => {
             <input
                 type="text"
                 className="form-control"
+                onChange={handleSearchContact}
+                value={value}
                 style={{
                     backgroundColor: COMMENT,
                     borderColor: PURPLE,

@@ -1,35 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Contacts, Navbar, ViewContact } from "./components";
+import { useEffect, useRef, useState, useTransition } from "react";
+
 import { Routes, Route } from "react-router-dom";
+
+import { Contacts, Navbar, ViewContact } from "./components";
 import { ContactApi } from "./services/contactServices";
 
 const App = () => {
-    const [loading, setLoading] = useState(false);
-    const [contacts, setContacts] = useState([]);
-
-    useEffect(() => {
-        const getAllContacts = async () => {
-            const {
-                data: { items },
-            } = await ContactApi.getAllContacts();
-            console.log("response", items);
-            setContacts(items);
-        };
-        getAllContacts();
-    }, []);
+    const [isPending, startTransition] = useTransition();
 
     const listInnerRef = useRef();
+
+    const [loading, setLoading] = useState(false);
     const [currPage, setCurrPage] = useState(1);
     const [prevPage, setPrevPage] = useState(0);
     const [userList, setUserList] = useState([]);
     const [lastList, setLastList] = useState(false);
+
+    const [value, setValue] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
             const {
                 data: { items },
             } = await ContactApi.getContactsWithLimit(10, currPage);
-            console.log("aaaaaa", items);
             if (!items.length) {
                 setLastList(true);
                 return;
@@ -46,15 +39,41 @@ const App = () => {
         if (listInnerRef.current) {
             const { scrollTop, scrollHeight, clientHeight } =
                 listInnerRef.current;
-            console.log("scrollTop", scrollTop);
-            console.log("scrollHeight", scrollHeight);
-            console.log("clientHeight", clientHeight);
             if (scrollTop + clientHeight === scrollHeight) {
                 setCurrPage(currPage + 10);
             }
         }
     };
 
+    const handleSearchContact = (event) => {
+        const numberRegex = /^[0-9\b]+$/;
+        const letterRegex = /[^A-Za-z]/gi;
+
+        let value = event.target.value;
+        let query;
+        startTransition(async () => {
+            if (
+                event.target.value === "" ||
+                numberRegex.test(event.target.value)
+            ) {
+                value = value.replace(/^[0-9\b]+$/, "");
+                setValue(event.target.value);
+                query = `?where={"phone":{"contains":"${event.target.value}"}}`;
+                const {
+                    data: { items },
+                } = await ContactApi.searchContact(query, 10);
+                setUserList(items);
+            } else if (!letterRegex.test(value)) {
+                value = value.replace(/[^A-Za-z]/gi, "");
+                setValue(value);
+                query = `?where={"first_name":{"contains":"${value}"}}`;
+                const {
+                    data: { items },
+                } = await ContactApi.searchContact(query, 10);
+                setUserList(items);
+            }
+        });
+    };
     return (
         <div
             style={{
@@ -64,11 +83,13 @@ const App = () => {
             ref={listInnerRef}
             onScroll={onScroll}
         >
-            <Navbar />
+            <Navbar handleSearchContact={handleSearchContact} value={value} />
             <Routes>
                 <Route
                     path="/"
-                    element={<Contacts contacts={userList} loading={loading} />}
+                    element={
+                        <Contacts contacts={userList} loading={isPending} />
+                    }
                 />
                 <Route path="/contacts/:contactId" element={<ViewContact />} />
             </Routes>

@@ -10,13 +10,9 @@ const ContactApi = {
     async getContact(contactId) {
         return await http.get(`passenger/${contactId}`);
     },
-    async searchContact(query, limit = 30) {
+    async searchContact(query, limit = 10) {
         return await http.get(
-            `/passenger/?where=${
-                typeof query === "string"
-                    ? `first-name:{contains:${query}}`
-                    : `phoneNumber:{contains:${query}`
-            }` + `&sort=createdAt DESC&limit=${limit}`
+            `/passenger/${query}` + `&sort=createdAt DESC&limit=${limit}`
         );
     },
 };
