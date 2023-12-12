@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CURRENT_LINE, ORANGE } from "../../helpers/colors";
+import { CURRENT_LINE, FOREGROUND, ORANGE } from "../../helpers/colors";
 import Contact from "./Contact";
 import files from "../../helpers/files";
 import Spinner from "../Spinner";
 import { ContactApi } from "../../services/contactServices";
 
 const Contacts = ({ contacts, loading }) => {
+    const visitedContactsList = JSON.parse(
+        localStorage.getItem("visitedContactsList")
+    );
+
     return (
         <>
             {loading ? (
@@ -13,10 +17,26 @@ const Contacts = ({ contacts, loading }) => {
             ) : (
                 <section className="container mt-4">
                     <div className="row">
+                        {visitedContactsList && (
+                            <>
+                                <h4 style={{ color: FOREGROUND }}>
+                                    visitedContacts
+                                </h4>
+
+                                {visitedContactsList.map((item) => (
+                                    <Contact key={item?.id} contact={item} />
+                                ))}
+                            </>
+                        )}
                         {contacts.length > 0 ? (
-                            contacts.map((item) => (
-                                <Contact key={item?.id} contact={item} />
-                            ))
+                            <>
+                                <h4 style={{ color: FOREGROUND }}>
+                                    Contacts List
+                                </h4>
+                                {contacts.map((item) => (
+                                    <Contact key={item?.id} contact={item} />
+                                ))}
+                            </>
                         ) : (
                             <div
                                 className="text-center py-5"

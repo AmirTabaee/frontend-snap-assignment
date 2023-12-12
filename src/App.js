@@ -15,6 +15,7 @@ const App = () => {
     const [prevPage, setPrevPage] = useState(0);
     const [userList, setUserList] = useState([]);
     const [lastList, setLastList] = useState(false);
+    const [filteredContacts, setFilteredContacts] = useState([]);
 
     const [value, setValue] = useState("");
 
@@ -47,32 +48,36 @@ const App = () => {
 
     const handleSearchContact = (event) => {
         const numberRegex = /^[0-9\b]+$/;
-        const letterRegex = /[^A-Za-z]/gi;
+        const letterRegex = /[^a-zA-Z' ']/g;
 
         let value = event.target.value;
         let query;
-        startTransition(async () => {
-            if (
-                event.target.value === "" ||
-                numberRegex.test(event.target.value)
-            ) {
-                value = value.replace(/^[0-9\b]+$/, "");
-                setValue(event.target.value);
+        if (event.target.value === "" || numberRegex.test(event.target.value)) {
+            value = value.replace(/^[0-9\b]+$/, "");
+            setValue(event.target.value);
+            startTransition(async () => {
                 query = `?where={"phone":{"contains":"${event.target.value}"}}`;
                 const {
                     data: { items },
                 } = await ContactApi.searchContact(query, 10);
-                setUserList(items);
-            } else if (!letterRegex.test(value)) {
-                value = value.replace(/[^A-Za-z]/gi, "");
-                setValue(value);
-                query = `?where={"first_name":{"contains":"${value}"}}`;
+                setFilteredContacts(items);
+            });
+        } else if (!letterRegex.test(value)) {
+            value = value.replace(/[^a-zA-Z' ']/g, "");
+            setValue(value);
+            startTransition(async () => {
+                if (value.includes(" ")) {
+                    const [firstName, lastName] = value.split(" ");
+                    query = `?where={"first_name":{"contains":"${firstName}"},"last_name":{"contains":"${lastName}"}}`;
+                } else {
+                    query = `?where={"first_name":{"contains":"${value}"}}`;
+                }
                 const {
                     data: { items },
                 } = await ContactApi.searchContact(query, 10);
-                setUserList(items);
-            }
-        });
+                setFilteredContacts(items);
+            });
+        }
     };
     return (
         <div
@@ -81,14 +86,19 @@ const App = () => {
                 overflowY: "auto",
             }}
             ref={listInnerRef}
-            onScroll={onScroll}
+            onScroll={value ? null : onScroll}
         >
             <Navbar handleSearchContact={handleSearchContact} value={value} />
             <Routes>
                 <Route
                     path="/"
                     element={
-                        <Contacts contacts={userList} loading={isPending} />
+                        <Contacts
+                            contacts={
+                                value === "" ? userList : filteredContacts
+                            }
+                            // loading={isPending}
+                        />
                     }
                 />
                 <Route path="/contacts/:contactId" element={<ViewContact />} />

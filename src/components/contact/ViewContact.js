@@ -13,12 +13,32 @@ const ViewContact = () => {
     const [contactInfo, setContactInfo] = useState(null);
     console.log("contactId", contactId);
 
+    const handleSetLastVisitedContacts = (contactInfo) => {
+        const visitedContactsList = JSON.parse(
+            localStorage.getItem("visitedContactsList")
+        );
+        let tempArray = visitedContactsList ? [...visitedContactsList] : [];
+        const contactExist =
+            tempArray.find((item) => item.id === contactInfo.id) || null;
+        if (contactExist) {
+            return;
+        }
+        if (tempArray.length < 4) {
+            tempArray.unshift(contactInfo);
+        } else {
+            tempArray.pop(tempArray[3]);
+            tempArray.unshift(contactInfo);
+        }
+        localStorage.setItem("visitedContactsList", JSON.stringify(tempArray));
+    };
+
     useEffect(() => {
         const getContactInfo = async () => {
             setLoading(true);
             const { data } = await ContactApi.getContact(Number(contactId));
             setContactInfo(data);
             setLoading(false);
+            handleSetLastVisitedContacts(data);
         };
         getContactInfo();
     }, []);
