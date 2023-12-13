@@ -24,7 +24,7 @@ const App = () => {
             const {
                 data: { items },
             } = await ContactApi.getContactsWithLimit(10, currPage);
-            if (!items.length) {
+            if (!items?.length) {
                 setLastList(true);
                 return;
             }

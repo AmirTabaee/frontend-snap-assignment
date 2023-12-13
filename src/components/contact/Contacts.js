@@ -1,9 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
 import { CURRENT_LINE, FOREGROUND, ORANGE } from "../../helpers/colors";
 import Contact from "./Contact";
 import files from "../../helpers/files";
 import Spinner from "../Spinner";
-import { ContactApi } from "../../services/contactServices";
 
 const Contacts = ({ contacts, loading }) => {
     const visitedContactsList = JSON.parse(

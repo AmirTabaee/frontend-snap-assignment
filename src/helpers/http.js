@@ -1,7 +1,7 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const REACT_APP_BASE_URL = process.env.BASE_URL;
-console.log("ali", REACT_APP_BASE_URL);
 
 let instance = axios.create({
     baseURL: REACT_APP_BASE_URL,
@@ -40,20 +40,34 @@ instance.interceptors.response.use(
         try {
             if (error.response) {
                 const { status, data } = error.response;
-
                 switch (status) {
-                    case 401: {
-                        break;
-                    }
-                    case 403: {
-                        break;
-                    }
                     case 404: {
+                        toast.error(
+                            `${error.response.status} ${error.response.statusText}`
+                        );
                         break;
                     }
-                    case 500:
-                    case 504: {
+                    case 500: {
+                        toast.error(
+                            `${error.response.status} ${error.response.statusText}`
+                        );
                         break;
+                    }
+                }
+
+                if (config?.rejectLog !== true && status) {
+                    if (
+                        config?.showErrorMessage === undefined ||
+                        config?.showErrorMessage === true
+                    ) {
+                        if (
+                            error.response.status !== 404 &&
+                            error.response.status !== 500
+                        ) {
+                            toast.error(
+                                `${error.response.status} ${error.response.statusText}`
+                            );
+                        }
                     }
                 }
                 if (error.response) {
@@ -70,7 +84,6 @@ instance.interceptors.response.use(
         } catch (exception) {
             console.log(exception, "exception");
             if (exception === "NetworkError") {
-                window.location.replace("/");
                 console.log(exception, "exception");
             }
             return Promise.reject(error);
@@ -79,4 +92,5 @@ instance.interceptors.response.use(
 );
 
 const http = instance;
+
 export { http, contentTypeEnum };
