@@ -79,7 +79,7 @@ instance.interceptors.response.use(
                     return Promise.reject(error);
                 }
             } else {
-                throw "NetworkError";
+                toast.error("Network Error");
             }
         } catch (exception) {
             console.log(exception, "exception");

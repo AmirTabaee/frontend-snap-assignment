@@ -21,15 +21,16 @@ const App = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const {
-                data: { items },
-            } = await ContactApi.getContactsWithLimit(10, currPage);
-            if (!items?.length) {
+            const response = await ContactApi.getContactsWithLimit(
+                10,
+                currPage
+            );
+            if (!response?.data?.items?.length) {
                 setLastList(true);
                 return;
             }
             setPrevPage(currPage);
-            setUserList([...userList, ...items]);
+            setUserList([...userList, ...response?.data?.items]);
         };
         if (!lastList && prevPage !== currPage) {
             fetchData();
