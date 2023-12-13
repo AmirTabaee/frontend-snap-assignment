@@ -4,9 +4,13 @@ import { Routes, Route } from "react-router-dom";
 
 import { Contacts, Navbar, ViewContact } from "./components";
 import { ContactApi } from "./services/contactServices";
+import classes from "./App.module.scss";
 
 const App = () => {
     const listInnerRef = useRef();
+
+    const [fetchDataLoading, setFetchDataLoading] = useState(false);
+    const [scrollLoading, setScrollLoading] = useState(false);
 
     const [currPage, setCurrPage] = useState(1);
     const [prevPage, setPrevPage] = useState(0);
@@ -18,6 +22,7 @@ const App = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setFetchDataLoading(scrollLoading ? false : true);
             const response = await ContactApi.getContactsWithLimit(
                 10,
                 currPage
@@ -28,6 +33,8 @@ const App = () => {
             }
             setPrevPage(currPage);
             setUserList([...userList, ...response?.data?.items]);
+            setFetchDataLoading(false);
+            setScrollLoading(false);
         };
         if (!lastList && prevPage !== currPage) {
             fetchData();
@@ -36,9 +43,13 @@ const App = () => {
 
     const onScroll = () => {
         if (listInnerRef.current) {
+            if (scrollLoading) {
+                return;
+            }
             const { scrollTop, scrollHeight, clientHeight } =
                 listInnerRef.current;
             if (scrollTop + clientHeight === scrollHeight) {
+                setScrollLoading(true);
                 setCurrPage(currPage + 10);
             }
         }
@@ -78,11 +89,8 @@ const App = () => {
 
     return (
         <div
-            style={{
-                height: "100vh",
-                overflowY: "auto",
-            }}
             ref={listInnerRef}
+            className={classes.app_container}
             onScroll={value ? null : onScroll}
         >
             <Navbar handleSearchContact={handleSearchContact} />
@@ -94,6 +102,8 @@ const App = () => {
                             contacts={
                                 value === "" ? userList : filteredContacts
                             }
+                            fetchDataLoading={fetchDataLoading}
+                            scrollLoading={scrollLoading}
                         />
                     }
                 />

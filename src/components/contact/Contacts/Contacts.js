@@ -4,14 +4,14 @@ import Spinner from "../../Spinner/Spinner";
 import { lang } from "../../../locale/lang";
 import classes from "./Contacts.module.scss";
 
-const Contacts = ({ contacts, loading }) => {
+const Contacts = ({ contacts, fetchDataLoading, scrollLoading }) => {
     const visitedContactsList = JSON.parse(
         localStorage.getItem("visitedContactsList")
     );
 
     return (
         <>
-            {loading ? (
+            {fetchDataLoading ? (
                 <Spinner />
             ) : (
                 <section className="container mt-4">
@@ -35,6 +35,7 @@ const Contacts = ({ contacts, loading }) => {
                                 {contacts.map((item) => (
                                     <Contact key={item?.id} contact={item} />
                                 ))}
+                                {scrollLoading ? <Spinner /> : null}
                             </>
                         ) : (
                             <div

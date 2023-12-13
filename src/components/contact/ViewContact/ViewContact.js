@@ -14,7 +14,6 @@ const ViewContact = () => {
     const [loading, setLoading] = useState(false);
     const [contactInfo, setContactInfo] = useState(null);
     const [contactInfoArray, setContactInfoArray] = useState([]);
-    console.log("contactInfoArray", contactInfoArray);
 
     const handleSetLastVisitedContacts = (contactInfo) => {
         const visitedContactsList = JSON.parse(
@@ -40,9 +39,9 @@ const ViewContact = () => {
             setLoading(true);
             const { data } = await ContactApi.getContact(Number(contactId));
             setContactInfo(data);
-            setLoading(false);
-            handleSetLastVisitedContacts(data);
             setContactInfoArray(viewContactItems(lang, data));
+            handleSetLastVisitedContacts(data);
+            setLoading(false);
         };
         getContactInfo();
     }, []);
@@ -100,7 +99,7 @@ const ViewContact = () => {
                                 </div>
                             </div>
                             <div className="row my-2">
-                                <div className="d-grid gap-2 col-6 mx-auto">
+                                <div className="d-grid gap-2 col-2 mx-auto">
                                     <Link
                                         to={"/"}
                                         className={`btn ${classes.link_style}`}
