@@ -19,8 +19,8 @@ const SearchContact = ({ handleSearchContact, value }) => {
             <input
                 type="text"
                 className="form-control"
-                onChange={handleSearchContact}
-                value={value}
+                onChange={(event) => handleSearchContact(event.target.value)}
+                // value={value}
                 style={{
                     backgroundColor: COMMENT,
                     borderColor: PURPLE,
