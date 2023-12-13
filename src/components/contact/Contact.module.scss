@@ -1,0 +1,13 @@
+@import "../../index.scss";
+
+.card_background {
+    background-color: $CURRENT_LINE !important;
+}
+
+.cursor_pointer {
+    cursor: pointer;
+}
+
+.image_border {
+    border: 1px solid $PURPLE;
+}

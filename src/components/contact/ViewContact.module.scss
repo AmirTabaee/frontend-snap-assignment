@@ -1,0 +1,25 @@
+@import "../../index.scss";
+
+.text_cyan {
+    color: $CYAN;
+}
+
+.background_cyan {
+    background-color: $CYAN;
+}
+
+.card_container_style {
+    border-radius: 1em;
+    background-color: $CURRENT_LINE;
+}
+
+.image_border {
+    border: 1px solid $PURPLE;
+}
+
+.link_style {
+    background-color: $PURPLE;
+    :hover {
+        background-color: $PURPLE;
+    }
+}

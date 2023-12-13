@@ -1,20 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { CURRENT_LINE, PURPLE } from "../../helpers/colors";
 import files from "../../helpers/files";
+import classes from "./contact.module.scss";
+import { lang } from "../../locale/lang";
 
 const Contact = ({ contact }) => {
     const navigate = useNavigate();
 
     return (
         <div className="col-md-6">
-            <div
-                style={{ backgroundColor: CURRENT_LINE }}
-                className="card my-2"
-            >
+            <div className={`card my-2 ${classes.card_background}`}>
                 <div
-                    className="card-body"
-                    style={{ cursor: "pointer" }}
+                    className={`card-body ${classes.cursor_pointer}`}
                     onClick={() => navigate(`contacts/${contact?.id}`)}
                 >
                     <div className="row align-items-center d-flex justify-content-around">
@@ -30,14 +27,13 @@ const Contact = ({ contact }) => {
                                     " " +
                                     contact?.last_name
                                 }
-                                style={{ border: `1px solid ${PURPLE}` }}
-                                className="img-fluid rounded"
+                                className={`img-fluid rounded ${classes.image_border}`}
                             />
                         </div>
                         <div className="col-md-7 col-sm-7">
                             <ul className="list-group">
                                 <li className="list-group-item list-group-item-dark">
-                                    Full name :{"  "}
+                                    {lang.fullName} :{"  "}
                                     <span className="fw-bold">
                                         {contact?.first_name +
                                             " " +
@@ -46,14 +42,14 @@ const Contact = ({ contact }) => {
                                 </li>
 
                                 <li className="list-group-item list-group-item-dark">
-                                    Phone number:{"  "}
+                                    {lang.phoneNumber}:{"  "}
                                     <span className="fw-bold">
                                         {contact?.phone}
                                     </span>
                                 </li>
 
                                 <li className="list-group-item list-group-item-dark">
-                                    Address :{"  "}
+                                    {lang.address} :{"  "}
                                     <span className="fw-bold">
                                         {contact?.address
                                             ? contact?.address

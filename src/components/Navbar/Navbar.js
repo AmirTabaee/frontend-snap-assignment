@@ -1,26 +1,23 @@
-import React from "react";
-import SearchContact from "./contact/SearchContact";
-
-import { PURPLE, BACKGROUND } from "../helpers/colors";
+import SearchContact from "../contact/SearchContact";
+import { lang } from "../../locale/lang";
+import classes from "./Navbar.module.scss";
 
 const Navbar = ({ handleSearchContact, value }) => {
     return (
         <nav
-            className="navbar navbar-dark navbar-expand-sm shadow-lg"
-            style={{ backgroundColor: BACKGROUND }}
+            className={`navbar navbar-dark navbar-expand-sm shadow-lg ${classes.nav_style}`}
         >
             <div className="container">
                 <div className="row w-100">
                     <div className="col">
                         <div className="navbar-brand">
                             <i
-                                className="fas fa-id-badge"
-                                style={{ color: PURPLE }}
+                                className={`fas fa-id-badge ${classes.color_purple}`}
                             />{" "}
-                            <span style={{ color: PURPLE }}>
-                                Contacts Manager
+                            <span className={classes.color_purple}>
+                                {lang.contactManager}
                             </span>{" "}
-                            Web Application
+                            {lang.webApplication}
                         </div>
                     </div>
                     <div className="col">

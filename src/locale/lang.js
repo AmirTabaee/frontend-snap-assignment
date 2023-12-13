@@ -1,0 +1,17 @@
+export const lang = {
+    address: "Address",
+    backToHome: "Back to home",
+    company: "Company",
+    contactInfo: "Contact Information",
+    contactList: "Contact List",
+    contactManager: "Contact Manager",
+    email: "Email",
+    fullName: "Full name",
+    gender: "Gender",
+    noContactFound: "No Contact Found!",
+    phoneNumber: "Phone number",
+    searchContact: "Search Contact",
+    telegram: "Telegram",
+    visitedContacts: "Visited Contacts",
+    webApplication: "Web Application",
+};

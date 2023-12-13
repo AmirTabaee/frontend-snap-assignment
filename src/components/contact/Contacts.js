@@ -1,7 +1,8 @@
-import { CURRENT_LINE, FOREGROUND, ORANGE } from "../../helpers/colors";
 import Contact from "./Contact";
 import files from "../../helpers/files";
-import Spinner from "../Spinner";
+import Spinner from "../Spinner/Spinner";
+import { lang } from "../../locale/lang";
+import classes from "./Contacts.module.scss";
 
 const Contacts = ({ contacts, loading }) => {
     const visitedContactsList = JSON.parse(
@@ -17,8 +18,8 @@ const Contacts = ({ contacts, loading }) => {
                     <div className="row">
                         {visitedContactsList && (
                             <>
-                                <h4 style={{ color: FOREGROUND }}>
-                                    visitedContacts
+                                <h4 className={classes.title_foreground}>
+                                    {lang.visitedContacts}
                                 </h4>
 
                                 {visitedContactsList.map((item) => (
@@ -28,8 +29,8 @@ const Contacts = ({ contacts, loading }) => {
                         )}
                         {contacts.length > 0 ? (
                             <>
-                                <h4 style={{ color: FOREGROUND }}>
-                                    Contacts List
+                                <h4 className={classes.title_foreground}>
+                                    {lang.contactList}
                                 </h4>
                                 {contacts.map((item) => (
                                     <Contact key={item?.id} contact={item} />
@@ -37,11 +38,10 @@ const Contacts = ({ contacts, loading }) => {
                             </>
                         ) : (
                             <div
-                                className="text-center py-5"
-                                style={{ backgroundColor: CURRENT_LINE }}
+                                className={`text-center py-5 ${classes.card_currentLine}`}
                             >
-                                <p className="h3" style={{ color: ORANGE }}>
-                                    No Contact Found
+                                <p className={`h3 ${classes.text_orange}`}>
+                                    {lang.noContactFound}
                                 </p>
                                 <img
                                     src={files.gif.NotFound}

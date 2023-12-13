@@ -54,7 +54,6 @@ instance.interceptors.response.use(
                         break;
                     }
                 }
-
                 if (config?.rejectLog !== true && status) {
                     if (
                         config?.showErrorMessage === undefined ||
@@ -82,7 +81,6 @@ instance.interceptors.response.use(
                 toast.error("Network Error");
             }
         } catch (exception) {
-            console.log(exception, "exception");
             if (exception === "NetworkError") {
                 console.log(exception, "exception");
             }

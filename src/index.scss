@@ -3,6 +3,19 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";
 
+// theme color
+$BACKGROUND : #282a36;
+$CURRENT_LINE : #44475a;
+$FOREGROUND : #f8f8f2;
+$COMMENT : #6272a4;
+$CYAN : #8be9fd;
+$GREEN : #50fa7b;
+$ORANGE : #ffb86c;
+$PINK : #ff79c6;
+$PURPLE : #bd93f9;
+$RED : #ff5555;
+$YELLOW : #f1fa8c;
+
 body{
     background-color:#282a36 ;
 }
@@ -10,19 +23,19 @@ body{
 input[type="text"]::-webkit-input-placeholder,
 input[type="email"]::-webkit-input-placeholder,
 input[type="number"]::-webkit-input-placeholder{
-    color:#f8f8f4 ;
+    color:$FOREGROUND ;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="number"]{
-    color: #f8f8f4 !important;
-    background-color: #44475a !important;
-    border-color: #bd93f9 !important;
+    color:$FOREGROUND !important;
+    background-color: $CURRENT_LINE !important;
+    border-color: $PURPLE !important;
 }
 
 .form-control{
-    background-color: #44475a !important;
-    color: #f8f8f4 !important;
-    border-color: #bd93f9 !important;
+    background-color: $CURRENT_LINE !important;
+    color: $FOREGROUND !important;
+    border-color:  $PURPLE !important;
 }

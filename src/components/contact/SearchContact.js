@@ -1,31 +1,24 @@
 import React from "react";
 
 import { PURPLE, COMMENT } from "../../helpers/colors";
+import { lang } from "../../locale/lang";
+import classes from "./SearchContact.module.scss";
 
-const SearchContact = ({ handleSearchContact, value }) => {
+const SearchContact = ({ handleSearchContact }) => {
     return (
         <div className="input-group">
             <span
-                className="input-group-text"
+                className={`input-group-text ${classes.icon_style}`}
                 id="basic-addon1"
-                style={{
-                    backgroundColor: PURPLE,
-                    borderColor: PURPLE,
-                }}
             >
                 <i className="fas fa-search" />
             </span>
 
             <input
                 type="text"
-                className="form-control"
+                className={`form-control ${classes.input_style}`}
                 onChange={(event) => handleSearchContact(event.target.value)}
-                // value={value}
-                style={{
-                    backgroundColor: COMMENT,
-                    borderColor: PURPLE,
-                }}
-                placeholder="Search Contact"
+                placeholder={lang.searchContact}
                 aria-label="Input group example"
                 aria-describedby="btnGroupAddon"
             />

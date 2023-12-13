@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { Spinner } from "../";
-import { CURRENT_LINE, CYAN, PURPLE } from "../../helpers/colors";
 import { ContactApi } from "../../services/contactServices";
 import files from "../../helpers/files";
+import { lang } from "../../locale/lang";
+import classes from "./ViewContact.module.scss";
 
 const ViewContact = () => {
     const { contactId } = useParams();
@@ -50,14 +51,14 @@ const ViewContact = () => {
             <section className="view-contact-intro p3">
                 <div className="container">
                     <div className="row my-2 text-center">
-                        <p className="h3 fw-bold" style={{ color: CYAN }}>
-                            Contact Information
+                        <p className={`h3 fw-bold ${classes.text_cyan}`}>
+                            {lang.contactInfo}
                         </p>
                     </div>
                 </div>
             </section>
 
-            <hr style={{ backgroundColor: CYAN }} />
+            <hr className={classes.background_cyan} />
 
             {loading ? (
                 <Spinner />
@@ -65,11 +66,7 @@ const ViewContact = () => {
                 <>
                     <section className="view-contact mt-e">
                         <div
-                            className="container p-2"
-                            style={{
-                                borderRadius: "1em",
-                                backgroundColor: CURRENT_LINE,
-                            }}
+                            className={`container p-2 ${classes.card_container_style}`}
                         >
                             <div className="row align-items-center">
                                 <div className="col-md-3">
@@ -84,16 +81,13 @@ const ViewContact = () => {
                                             " " +
                                             contactInfo?.last_name
                                         }
-                                        className="img-fluid rounded"
-                                        style={{
-                                            border: `1px solid ${PURPLE}`,
-                                        }}
+                                        className={`img-fluid rounded ${classes.image_border}`}
                                     />
                                 </div>
                                 <div className="col-md-9">
                                     <ul className="list-group">
                                         <li className="list-group-item list-group-item-dark">
-                                            Full name:{" "}
+                                            {lang.fullName}:{" "}
                                             <span className="fw-bold">
                                                 {contactInfo?.first_name +
                                                     " " +
@@ -101,37 +95,37 @@ const ViewContact = () => {
                                             </span>
                                         </li>
                                         <li className="list-group-item list-group-item-dark">
-                                            Gender:{" "}
+                                            {lang.gender}:{" "}
                                             <span className="fw-bold">
                                                 {contactInfo?.gender}
                                             </span>
                                         </li>
                                         <li className="list-group-item list-group-item-dark">
-                                            Phone number:{" "}
+                                            {lang.phoneNumber}:{" "}
                                             <span className="fw-bold">
                                                 {contactInfo?.phone}
                                             </span>
                                         </li>
                                         <li className="list-group-item list-group-item-dark">
-                                            Email:{" "}
+                                            {lang.email}:{" "}
                                             <span className="fw-bold">
                                                 {contactInfo?.email}
                                             </span>
                                         </li>
                                         <li className="list-group-item list-group-item-dark">
-                                            Telegram:{" "}
+                                            {lang.telegram}:{" "}
                                             <span className="fw-bold">
                                                 {contactInfo?.telegram}
                                             </span>
                                         </li>
                                         <li className="list-group-item list-group-item-dark">
-                                            Company:{" "}
+                                            {lang.company}:{" "}
                                             <span className="fw-bold">
                                                 {contactInfo?.company}
                                             </span>
                                         </li>
                                         <li className="list-group-item list-group-item-dark">
-                                            Address:{" "}
+                                            {lang.address}:{" "}
                                             <span className="fw-bold">
                                                 {contactInfo?.address}
                                             </span>
@@ -143,10 +137,9 @@ const ViewContact = () => {
                                 <div className="d-grid gap-2 col-6 mx-auto">
                                     <Link
                                         to={"/"}
-                                        className="btn"
-                                        style={{ backgroundColor: PURPLE }}
+                                        className={`btn ${classes.link_style}`}
                                     >
-                                        Back to home
+                                        {lang.backToHome}
                                     </Link>
                                 </div>
                             </div>
