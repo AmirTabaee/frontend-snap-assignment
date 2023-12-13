@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 
-import { Spinner } from "../";
-import { ContactApi } from "../../services/contactServices";
-import files from "../../helpers/files";
-import { lang } from "../../locale/lang";
+import { Spinner } from "../..";
+import { ContactApi } from "../../../services/contactServices";
+import files from "../../../helpers/files";
+import { lang } from "../../../locale/lang";
 import classes from "./ViewContact.module.scss";
+import { viewContactItems } from "../../../mock/contact";
 
 const ViewContact = () => {
     const { contactId } = useParams();
     const [loading, setLoading] = useState(false);
     const [contactInfo, setContactInfo] = useState(null);
-    console.log("contactId", contactId);
+    const [contactInfoArray, setContactInfoArray] = useState([]);
+    console.log("contactInfoArray", contactInfoArray);
 
     const handleSetLastVisitedContacts = (contactInfo) => {
         const visitedContactsList = JSON.parse(
@@ -40,11 +42,10 @@ const ViewContact = () => {
             setContactInfo(data);
             setLoading(false);
             handleSetLastVisitedContacts(data);
+            setContactInfoArray(viewContactItems(lang, data));
         };
         getContactInfo();
     }, []);
-
-    console.log("contactInfo", contactInfo);
 
     return (
         <>
@@ -57,9 +58,7 @@ const ViewContact = () => {
                     </div>
                 </div>
             </section>
-
             <hr className={classes.background_cyan} />
-
             {loading ? (
                 <Spinner />
             ) : (
@@ -86,50 +85,17 @@ const ViewContact = () => {
                                 </div>
                                 <div className="col-md-9">
                                     <ul className="list-group">
-                                        <li className="list-group-item list-group-item-dark">
-                                            {lang.fullName}:{" "}
-                                            <span className="fw-bold">
-                                                {contactInfo?.first_name +
-                                                    " " +
-                                                    contactInfo?.last_name}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item list-group-item-dark">
-                                            {lang.gender}:{" "}
-                                            <span className="fw-bold">
-                                                {contactInfo?.gender}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item list-group-item-dark">
-                                            {lang.phoneNumber}:{" "}
-                                            <span className="fw-bold">
-                                                {contactInfo?.phone}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item list-group-item-dark">
-                                            {lang.email}:{" "}
-                                            <span className="fw-bold">
-                                                {contactInfo?.email}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item list-group-item-dark">
-                                            {lang.telegram}:{" "}
-                                            <span className="fw-bold">
-                                                {contactInfo?.telegram}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item list-group-item-dark">
-                                            {lang.company}:{" "}
-                                            <span className="fw-bold">
-                                                {contactInfo?.company}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item list-group-item-dark">
-                                            {lang.address}:{" "}
-                                            <span className="fw-bold">
-                                                {contactInfo?.address}
-                                            </span>
-                                        </li>
+                                        {contactInfoArray.map((item) => (
+                                            <li
+                                                className="list-group-item list-group-item-dark"
+                                                key={item?.id}
+                                            >
+                                                {item?.title}:{" "}
+                                                <span className="fw-bold">
+                                                    {item?.description}
+                                                </span>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
                             </div>

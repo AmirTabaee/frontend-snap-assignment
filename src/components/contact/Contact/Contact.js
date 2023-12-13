@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
-import files from "../../helpers/files";
+import files from "../../../helpers/files";
 import classes from "./contact.module.scss";
-import { lang } from "../../locale/lang";
+import { lang } from "../../../locale/lang";
 
 const Contact = ({ contact }) => {
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Contact = ({ contact }) => {
                                 </li>
 
                                 <li className="list-group-item list-group-item-dark">
-                                    {lang.phoneNumber}:{"  "}
+                                    {lang.phone}:{"  "}
                                     <span className="fw-bold">
                                         {contact?.phone}
                                     </span>

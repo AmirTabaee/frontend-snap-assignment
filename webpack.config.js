@@ -10,9 +10,7 @@ module.exports = {
     mode: "development",
     entry: path.join(__dirname, "src", "index.js"),
     output: {
-        filename: "[name].[contenthash].js",
-        chunkFilename: "[name].[contenthash].js",
-        path: path.resolve(__dirname, "dist"),
+        publicPath: "/",
     },
     devServer: {
         historyApiFallback: true,

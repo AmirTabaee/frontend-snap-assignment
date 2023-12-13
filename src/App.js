@@ -85,7 +85,7 @@ const App = () => {
             ref={listInnerRef}
             onScroll={value ? null : onScroll}
         >
-            <Navbar handleSearchContact={handleSearchContact} value={value} />
+            <Navbar handleSearchContact={handleSearchContact} />
             <Routes>
                 <Route
                     path="/"

@@ -1,7 +1,6 @@
 import React from "react";
 
-import { PURPLE, COMMENT } from "../../helpers/colors";
-import { lang } from "../../locale/lang";
+import { lang } from "../../../locale/lang";
 import classes from "./SearchContact.module.scss";
 
 const SearchContact = ({ handleSearchContact }) => {

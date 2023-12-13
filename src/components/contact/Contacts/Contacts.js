@@ -1,7 +1,7 @@
-import Contact from "./Contact";
-import files from "../../helpers/files";
-import Spinner from "../Spinner/Spinner";
-import { lang } from "../../locale/lang";
+import Contact from "../Contact/Contact";
+import files from "../../../helpers/files";
+import Spinner from "../../Spinner/Spinner";
+import { lang } from "../../../locale/lang";
 import classes from "./Contacts.module.scss";
 
 const Contacts = ({ contacts, loading }) => {

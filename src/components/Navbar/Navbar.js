@@ -1,8 +1,8 @@
-import SearchContact from "../contact/SearchContact";
+import SearchContact from "../contact/SearchContact/SearchContact";
 import { lang } from "../../locale/lang";
 import classes from "./Navbar.module.scss";
 
-const Navbar = ({ handleSearchContact, value }) => {
+const Navbar = ({ handleSearchContact }) => {
     return (
         <nav
             className={`navbar navbar-dark navbar-expand-sm shadow-lg ${classes.nav_style}`}
@@ -23,7 +23,6 @@ const Navbar = ({ handleSearchContact, value }) => {
                     <div className="col">
                         <SearchContact
                             handleSearchContact={handleSearchContact}
-                            value={value}
                         />
                     </div>
                 </div>

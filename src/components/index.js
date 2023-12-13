@@ -1,7 +1,7 @@
 // Contact Components
-export { default as Contact } from "./contact/Contact";
-export { default as Contacts } from "./contact/Contacts";
-export { default as ViewContact } from "./contact/ViewContact";
+export { default as Contact } from "./contact/Contact/Contact";
+export { default as Contacts } from "./contact/Contacts/Contacts";
+export { default as ViewContact } from "./contact/ViewContact/ViewContact";
 
 // Other Components
 export { default as Navbar } from "./Navbar/Navbar";
