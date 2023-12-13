@@ -13,6 +13,7 @@ export const lang = {
     noContactFound: "No Contact Found!",
     phone: "Phone number",
     searchContact: "Search Contact",
+    searchedContacts: "Searched Contacts",
     telegram: "Telegram",
     visitedContacts: "Visited Contacts",
     webApplication: "Web Application",

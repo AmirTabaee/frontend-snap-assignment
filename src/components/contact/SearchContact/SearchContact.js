@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { lang } from "../../../locale/lang";
 import classes from "./SearchContact.module.scss";
+import { ContactContext } from "../../../context/ContactContext";
 
-const SearchContact = ({ handleSearchContact }) => {
+const SearchContact = () => {
+    const { handleSearchContact } = useContext(ContactContext);
     return (
         <div className="input-group">
             <span

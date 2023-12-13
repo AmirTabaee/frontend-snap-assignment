@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import { Contacts, Navbar, ViewContact } from "./components";
 import { ContactApi } from "./services/contactServices";
 import classes from "./App.module.scss";
+import { ContactContext } from "./context/ContactContext";
 
 const App = () => {
     const listInnerRef = useRef();
@@ -18,7 +19,7 @@ const App = () => {
     const [lastList, setLastList] = useState(false);
     const [filteredContacts, setFilteredContacts] = useState([]);
 
-    const [value, setValue] = useState("");
+    const [inputValue, setInputValue] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,60 +57,66 @@ const App = () => {
     };
 
     let inputSearchTimeOut;
-    const handleSearchContact = (value) => {
+    const handleSearchContact = async (value) => {
         clearTimeout(inputSearchTimeOut);
+        setInputValue(value);
+        setFetchDataLoading(true);
         inputSearchTimeOut = setTimeout(async () => {
             const numberRegex = /^[0-9\b]+$/;
-            const letterRegex = /[^a-zA-Z' ']/g;
+            let amir = parseInt(value);
             let query;
-            if (value === "" || numberRegex.test(value)) {
-                value = value.replace(/^[0-9\b]+$/, "");
-                setValue(value);
+            if (numberRegex.test(amir)) {
                 query = `?where={"phone":{"contains":"${value}"}}`;
-                const {
-                    data: { items },
-                } = await ContactApi.searchContact(query, 10);
-                setFilteredContacts(items);
-            } else if (!letterRegex.test(value)) {
-                value = value.replace(/[^a-zA-Z' ']/g, "");
-                setValue(value);
+            } else {
+                console.log(false);
                 if (value.includes(" ")) {
                     const [firstName, lastName] = value.split(" ");
                     query = `?where={"first_name":{"contains":"${firstName}"},"last_name":{"contains":"${lastName}"}}`;
                 } else {
                     query = `?where={"first_name":{"contains":"${value}"}}`;
                 }
-                const {
-                    data: { items },
-                } = await ContactApi.searchContact(query, 10);
-                setFilteredContacts(items);
             }
+            const {
+                data: { items },
+            } = await ContactApi.searchContact(query, 10);
+            setFilteredContacts(items);
+            setFetchDataLoading(false);
         }, 1000);
     };
 
     return (
-        <div
-            ref={listInnerRef}
-            className={classes.app_container}
-            onScroll={value ? null : onScroll}
-        >
-            <Navbar handleSearchContact={handleSearchContact} />
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <Contacts
-                            contacts={
-                                value === "" ? userList : filteredContacts
-                            }
-                            fetchDataLoading={fetchDataLoading}
-                            scrollLoading={scrollLoading}
-                        />
-                    }
-                />
-                <Route path="/contacts/:contactId" element={<ViewContact />} />
-            </Routes>
-        </div>
+        <ContactContext.Provider value={{ handleSearchContact }}>
+            <div
+                ref={listInnerRef}
+                className={classes.app_container}
+                onScroll={inputValue ? null : onScroll}
+            >
+                <Navbar />
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <Contacts
+                                contacts={
+                                    inputValue === ""
+                                        ? userList
+                                        : filteredContacts
+                                }
+                                fetchDataLoading={fetchDataLoading}
+                                scrollLoading={scrollLoading}
+                                isShowingResult={
+                                    inputValue === "" ? false : true
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="/contacts/:contactId"
+                        element={<ViewContact />}
+                    />
+                </Routes>
+            </div>
+        </ContactContext.Provider>
     );
 };
 
