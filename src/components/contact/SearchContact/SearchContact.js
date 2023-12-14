@@ -23,6 +23,7 @@ const SearchContact = () => {
                 placeholder={lang.searchContact}
                 aria-label="Input group example"
                 aria-describedby="btnGroupAddon"
+                data-testid="search-input"
             />
         </div>
     );
