@@ -49,7 +49,7 @@ const ViewContact = () => {
     return (
         <>
             <section className="view-contact-intro p3">
-                <div className="container">
+                <div className="container" data-testid="contact-1">
                     <div className="row my-2 text-center">
                         <p className={`h3 fw-bold ${classes.text_cyan}`}>
                             {lang.contactInfo}

@@ -7,7 +7,7 @@ const Navbar = () => {
         <nav
             className={`navbar navbar-dark navbar-expand-sm shadow-lg ${classes.nav_style}`}
         >
-            <div className="container">
+            <div className="container" data-testid="navbar-container">
                 <div className="row w-100">
                     <div className="col">
                         <div className="navbar-brand">

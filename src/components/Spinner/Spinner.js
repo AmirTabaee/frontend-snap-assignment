@@ -1,4 +1,3 @@
-import React from "react";
 import files from "../../helpers/files";
 import classes from "./Spinner.module.scss";
 

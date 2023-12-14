@@ -19,6 +19,7 @@ const SearchContact = () => {
                 type="text"
                 className={`form-control ${classes.input_style}`}
                 onChange={(event) => handleSearchContact(event.target.value)}
+                onKeyDown={(event) => /[a-z]/i.test(event.key)}
                 placeholder={lang.searchContact}
                 aria-label="Input group example"
                 aria-describedby="btnGroupAddon"
