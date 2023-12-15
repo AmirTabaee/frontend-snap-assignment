@@ -1,8 +1,9 @@
-import Contact from "../Contact/Contact";
 import files from "../../../helpers/files";
 import Spinner from "../../Spinner/Spinner";
 import { lang } from "../../../locale/lang";
 import classes from "./Contacts.module.scss";
+import MainLayout from "../../../layout/MainLayout";
+import { Contact } from "../..";
 
 const Contacts = ({
     contacts,
@@ -13,9 +14,8 @@ const Contacts = ({
     const visitedContactsList = JSON.parse(
         localStorage.getItem("visitedContactsList")
     );
-
     return (
-        <>
+        <MainLayout>
             {fetchDataLoading ? (
                 <Spinner />
             ) : (
@@ -60,7 +60,7 @@ const Contacts = ({
                     </div>
                 </section>
             )}
-        </>
+        </MainLayout>
     );
 };
 

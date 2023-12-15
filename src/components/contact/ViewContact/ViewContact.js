@@ -21,7 +21,7 @@ const ViewContact = () => {
         );
         let tempArray = visitedContactsList ? [...visitedContactsList] : [];
         const contactExist =
-            tempArray.find((item) => item.id === contactInfo.id) || null;
+            tempArray.find((item) => item?.id === contactInfo?.id) || null;
         if (contactExist) {
             return;
         }
@@ -37,10 +37,10 @@ const ViewContact = () => {
     useEffect(() => {
         const getContactInfo = async () => {
             setLoading(true);
-            const { data } = await ContactApi.getContact(Number(contactId));
-            setContactInfo(data);
-            setContactInfoArray(viewContactItems(lang, data));
-            handleSetLastVisitedContacts(data);
+            const response = await ContactApi.getContact(Number(contactId));
+            setContactInfo(response?.data);
+            setContactInfoArray(viewContactItems(lang, response?.data));
+            handleSetLastVisitedContacts(response?.data);
             setLoading(false);
         };
         getContactInfo();
@@ -63,52 +63,67 @@ const ViewContact = () => {
             ) : (
                 <>
                     <section className="view-contact mt-e">
-                        <div
-                            className={`container p-2 ${classes.card_container_style}`}
-                        >
-                            <div className="row align-items-center">
-                                <div className="col-md-3">
-                                    <img
-                                        src={
-                                            contactInfo?.avatar
-                                                ? contactInfo?.avatar
-                                                : files.png.UnknownUser
-                                        }
-                                        alt={
-                                            contactInfo?.first_name +
-                                            " " +
-                                            contactInfo?.last_name
-                                        }
-                                        className={`img-fluid rounded ${classes.image_border}`}
-                                    />
+                        {contactInfo ? (
+                            <div
+                                className={`container p-2 ${classes.card_container_style}`}
+                            >
+                                <div className="row align-items-center">
+                                    <div className="col-md-3">
+                                        <img
+                                            src={
+                                                contactInfo?.avatar
+                                                    ? contactInfo?.avatar
+                                                    : files.png.UnknownUser
+                                            }
+                                            alt={
+                                                contactInfo?.first_name +
+                                                " " +
+                                                contactInfo?.last_name
+                                            }
+                                            className={`img-fluid rounded ${classes.image_border}`}
+                                        />
+                                    </div>
+                                    <div className="col-md-9">
+                                        <ul className="list-group">
+                                            {contactInfoArray?.map((item) => (
+                                                <li
+                                                    className="list-group-item list-group-item-dark"
+                                                    key={item?.id}
+                                                >
+                                                    {item?.title}:{" "}
+                                                    <span className="fw-bold">
+                                                        {item?.description}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div className="col-md-9">
-                                    <ul className="list-group">
-                                        {contactInfoArray.map((item) => (
-                                            <li
-                                                className="list-group-item list-group-item-dark"
-                                                key={item?.id}
-                                            >
-                                                {item?.title}:{" "}
-                                                <span className="fw-bold">
-                                                    {item?.description}
-                                                </span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                <div className="row my-2">
+                                    <div className="d-grid gap-2 col-2 mx-auto">
+                                        <Link
+                                            to={"/"}
+                                            className={`btn ${classes.link_style}`}
+                                        >
+                                            {lang.backToHome}
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="row my-2">
-                                <div className="d-grid gap-2 col-2 mx-auto">
-                                    <Link
-                                        to={"/"}
-                                        className={`btn ${classes.link_style}`}
-                                    >
-                                        {lang.backToHome}
-                                    </Link>
-                                </div>
+                        ) : (
+                            <div
+                                className={`text-center py-5 ${classes.card_currentLine}`}
+                            >
+                                <p className={`h3 ${classes.text_orange}`}>
+                                    {lang.noContactFound}
+                                </p>
+                                <img
+                                    src={files.gif.NotFound}
+                                    alt="Not found"
+                                    className="w-25"
+                                />
                             </div>
-                        </div>
+                        )}
                     </section>
                 </>
             )}

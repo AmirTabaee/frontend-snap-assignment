@@ -79,6 +79,7 @@ instance.interceptors.response.use(
                     return Promise.reject(error);
                 }
             } else {
+                localStorage.removeItem("visitedContactsList");
                 toast.error("Network Error");
             }
         } catch (exception) {

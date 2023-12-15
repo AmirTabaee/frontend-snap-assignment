@@ -1,11 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 
 import { Routes, Route } from "react-router-dom";
 
-import { Contacts, Navbar, ViewContact } from "./components";
+import { Navbar, NotFound } from "./components";
 import { ContactApi } from "./services/contactServices";
 import classes from "./App.module.scss";
 import { ContactContext } from "./context/ContactContext";
+
+const Contacts = lazy(() => import("./components/contact/Contacts/Contacts"));
+const ViewContact = lazy(() =>
+    import("./components/contact/ViewContact/ViewContact")
+);
 
 const App = () => {
     const listInnerRef = useRef();
@@ -30,6 +35,7 @@ const App = () => {
             );
             if (!response?.data?.items?.length) {
                 setLastList(true);
+                setFetchDataLoading(false);
                 return;
             }
             setPrevPage(currPage);
@@ -59,9 +65,9 @@ const App = () => {
     let inputSearchTimeOut;
     const handleSearchContact = async (value) => {
         clearTimeout(inputSearchTimeOut);
-        setInputValue(value);
-        setFetchDataLoading(true);
         inputSearchTimeOut = setTimeout(async () => {
+            setInputValue(value);
+            setFetchDataLoading(true);
             const numberRegex = /^[0-9\b]+$/;
             let amir = parseInt(value);
             let query;
@@ -76,10 +82,8 @@ const App = () => {
                     query = `?where={"first_name":{"contains":"${value}"}}`;
                 }
             }
-            const {
-                data: { items },
-            } = await ContactApi.searchContact(query, 10);
-            setFilteredContacts(items);
+            const response = await ContactApi.searchContact(query, 10);
+            setFilteredContacts(response?.data?.items);
             setFetchDataLoading(false);
         }, 1000);
     };
@@ -91,30 +95,32 @@ const App = () => {
                 className={classes.app_container}
                 onScroll={inputValue ? null : onScroll}
             >
-                <Navbar />
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Contacts
-                                contacts={
-                                    inputValue === ""
-                                        ? userList
-                                        : filteredContacts
-                                }
-                                fetchDataLoading={fetchDataLoading}
-                                scrollLoading={scrollLoading}
-                                isShowingResult={
-                                    inputValue === "" ? false : true
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/contacts/:contactId"
-                        element={<ViewContact />}
-                    />
-                </Routes>
+                <Suspense fallback={<div>...loading</div>}>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <Contacts
+                                    contacts={
+                                        inputValue === ""
+                                            ? userList
+                                            : filteredContacts
+                                    }
+                                    fetchDataLoading={fetchDataLoading}
+                                    scrollLoading={scrollLoading}
+                                    isShowingResult={
+                                        inputValue === "" ? false : true
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="/contacts/:contactId"
+                            element={<ViewContact />}
+                        />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+                </Suspense>
             </div>
         </ContactContext.Provider>
     );

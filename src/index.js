@@ -7,12 +7,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./index.scss";
 import App from "./App";
+import { ErrorBoundary } from "./components";
 
 const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container);
 root.render(
     <BrowserRouter>
-        <ToastContainer />
-        <App />
+        <ErrorBoundary>
+            <ToastContainer />
+            <App />
+        </ErrorBoundary>
     </BrowserRouter>
 );
