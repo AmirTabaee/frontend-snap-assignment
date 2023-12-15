@@ -2,6 +2,7 @@ import ReactDOM from "react-dom/client";
 
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { HelmetProvider } from "react-helmet-async";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,7 +16,9 @@ root.render(
     <BrowserRouter>
         <ErrorBoundary>
             <ToastContainer />
-            <App />
+            <HelmetProvider>
+                <App />
+            </HelmetProvider>
         </ErrorBoundary>
     </BrowserRouter>
 );

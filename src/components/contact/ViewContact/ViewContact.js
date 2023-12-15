@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 import { Spinner } from "../..";
 import { ContactApi } from "../../../services/contactServices";
@@ -48,6 +49,11 @@ const ViewContact = () => {
 
     return (
         <>
+            <Helmet>
+                <title>
+                    {contactInfo?.first_name + " " + contactInfo?.last_name}
+                </title>
+            </Helmet>
             <section className="view-contact-intro p3">
                 <div className="container" data-testid="contact-1">
                     <div className="row my-2 text-center">

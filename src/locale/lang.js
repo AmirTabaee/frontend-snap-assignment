@@ -5,6 +5,7 @@ export const lang = {
     contactInfo: "Contact Information",
     contactList: "Contact List",
     contactManager: "Contact Manager",
+    contactManagerHome: "Contact Manager | Home",
     email: "Email",
     first_name: "First Name",
     last_name: "Last Name",

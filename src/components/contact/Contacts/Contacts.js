@@ -4,6 +4,7 @@ import { lang } from "../../../locale/lang";
 import classes from "./Contacts.module.scss";
 import MainLayout from "../../../layout/MainLayout";
 import { Contact } from "../..";
+import { Helmet } from "react-helmet-async";
 
 const Contacts = ({
     contacts,
@@ -16,6 +17,9 @@ const Contacts = ({
     );
     return (
         <MainLayout>
+            <Helmet>
+                <title>{lang.contactManagerHome}</title>
+            </Helmet>
             {fetchDataLoading ? (
                 <Spinner />
             ) : (
