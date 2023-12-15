@@ -2,15 +2,10 @@ import { useEffect, useRef, useState, lazy, Suspense } from "react";
 
 import { Routes, Route } from "react-router-dom";
 
-import { Navbar, NotFound } from "./components";
 import { ContactApi } from "./services/contactServices";
 import classes from "./App.module.scss";
 import { ContactContext } from "./context/ContactContext";
-
-const Contacts = lazy(() => import("./components/contact/Contacts/Contacts"));
-const ViewContact = lazy(() =>
-    import("./components/contact/ViewContact/ViewContact")
-);
+import { Home, NotFound, ViewContact } from "./pages";
 
 const App = () => {
     const listInnerRef = useRef();
@@ -100,7 +95,7 @@ const App = () => {
                         <Route
                             path="/"
                             element={
-                                <Contacts
+                                <Home
                                     contacts={
                                         inputValue === ""
                                             ? userList

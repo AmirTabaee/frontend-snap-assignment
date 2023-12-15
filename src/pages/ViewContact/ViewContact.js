@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
-import { Spinner } from "../..";
-import { ContactApi } from "../../../services/contactServices";
-import files from "../../../helpers/files";
-import { lang } from "../../../locale/lang";
+import files from "../../helpers/files";
+import { lang } from "../../locale/lang";
 import classes from "./ViewContact.module.scss";
-import { viewContactItems } from "../../../mock/contact";
+import { viewContactItems } from "../../mock/contact";
+import { Spinner } from "../../components";
+import { ContactApi } from "../../services/contactServices";
 
 const ViewContact = () => {
     const { contactId } = useParams();

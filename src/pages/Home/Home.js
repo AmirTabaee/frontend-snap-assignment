@@ -1,12 +1,11 @@
-import files from "../../../helpers/files";
-import Spinner from "../../Spinner/Spinner";
-import { lang } from "../../../locale/lang";
-import classes from "./Contacts.module.scss";
-import MainLayout from "../../../layout/MainLayout";
-import { Contact } from "../..";
+import files from "../../helpers/files";
+import { lang } from "../../locale/lang";
+import classes from "./Home.module.scss";
+import MainLayout from "../../layout/MainLayout";
+import { Contact, Spinner } from "../../components";
 import { Helmet } from "react-helmet-async";
 
-const Contacts = ({
+const Home = ({
     contacts,
     fetchDataLoading,
     scrollLoading,
@@ -68,4 +67,4 @@ const Contacts = ({
     );
 };
 
-export default Contacts;
+export default Home;

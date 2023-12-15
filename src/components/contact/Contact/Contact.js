@@ -8,7 +8,7 @@ const Contact = ({ contact }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="col-md-6" data-testId="contact-1">
+        <div className="col-md-6" data-testid="contact-1">
             <div className={`card my-2 ${classes.card_background}`}>
                 <div
                     className={`card-body ${classes.cursor_pointer}`}

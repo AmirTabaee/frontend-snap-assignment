@@ -1,4 +1,4 @@
-import SearchContact from "../contact/SearchContact/SearchContact";
+import { SearchContact } from "..";
 import { lang } from "../../locale/lang";
 import classes from "./Navbar.module.scss";
 
