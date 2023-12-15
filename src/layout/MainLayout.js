@@ -10,7 +10,6 @@ const MainLayout = ({ children }) => {
         setCurrPage,
         mainStateData: { scrollLoading, inputValue, currPage },
     } = useContext(MainContext);
-    console.log("currPage", currPage);
 
     const listInnerRef = useRef();
 
