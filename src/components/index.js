@@ -2,6 +2,10 @@ import { lazy } from "react";
 
 // Contact Components
 export const Contact = lazy(() => import("./contact/Contact/Contact"));
+export const Contacts = lazy(() => import("./contact/Contacts/Contacts"));
+export const ViewContact = lazy(() =>
+    import("./contact/ViewContact/ViewContact")
+);
 export const SearchContact = lazy(() =>
     import("./contact/SearchContact/SearchContact")
 );

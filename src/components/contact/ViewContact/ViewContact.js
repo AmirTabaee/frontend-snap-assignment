@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
-import files from "../../helpers/files";
-import { lang } from "../../locale/lang";
+import files from "../../../helpers/files";
+import { lang } from "../../../locale/lang";
 import classes from "./ViewContact.module.scss";
-import { viewContactItems } from "../../mock/contact";
-import { Spinner } from "../../components";
-import { ContactApi } from "../../services/contactServices";
+import { generateContactMockItems } from "../../../mock/contact";
+import { Spinner } from "../..";
+import { ContactApi } from "../../../services/contactServices";
 
 const ViewContact = () => {
     const { contactId } = useParams();
@@ -40,7 +40,7 @@ const ViewContact = () => {
             setLoading(true);
             const response = await ContactApi.getContact(Number(contactId));
             setContactInfo(response?.data);
-            setContactInfoArray(viewContactItems(lang, response?.data));
+            setContactInfoArray(generateContactMockItems(lang, response?.data));
             handleSetLastVisitedContacts(response?.data);
             setLoading(false);
         };
@@ -57,7 +57,7 @@ const ViewContact = () => {
             <section className="view-contact-intro p3">
                 <div className="container" data-testid="contact-1">
                     <div className="row my-2 text-center">
-                        <p className={`h3 fw-bold ${classes.text_cyan}`}>
+                        <p className={`h3 fw-bold ${classes.text_foreground}`}>
                             {lang.contactInfo}
                         </p>
                     </div>
@@ -68,12 +68,12 @@ const ViewContact = () => {
                 <Spinner />
             ) : (
                 <>
-                    <section className="view-contact mt-e">
+                    <section className="view-contact mt-e ">
                         {contactInfo ? (
                             <div
                                 className={`container p-2 ${classes.card_container_style}`}
                             >
-                                <div className="row align-items-center">
+                                <div className="row align-items-center p-4">
                                     <div className="col-md-3">
                                         <img
                                             src={
@@ -109,7 +109,7 @@ const ViewContact = () => {
                                     <div className="d-grid gap-2 col-2 mx-auto">
                                         <Link
                                             to={"/"}
-                                            className={`btn ${classes.link_style}`}
+                                            className="btn btn-secondary"
                                         >
                                             {lang.backToHome}
                                         </Link>

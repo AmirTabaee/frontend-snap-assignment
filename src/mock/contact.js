@@ -1,4 +1,4 @@
-export const viewContactItems = (lang, description) => {
+export const generateContactMockItems = (lang, description) => {
     const tempArray = [];
     let id = 1;
     if (!description) {

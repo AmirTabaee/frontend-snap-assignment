@@ -1,7 +1,7 @@
-@import "../../index.scss";
+@import "../../../index.scss";
 
-.text_cyan {
-    color: $CYAN;
+.text_foreground {
+    color: $FOREGROUND;
 }
 
 .background_cyan {
@@ -17,9 +17,9 @@
     border: 1px solid $PURPLE;
 }
 
-.link_style {
-    background-color: $PURPLE;
+.btn-primary {
+    background-color: $PURPLE !important;
     :hover {
-        background-color: $PURPLE;
+        background-color: $PURPLE !important;
     }
 }
