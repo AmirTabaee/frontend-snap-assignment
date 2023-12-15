@@ -12,7 +12,8 @@ import { ContactApi } from "../../services/contactServices";
 import { MainContext } from "../../context/MainContextProvider";
 
 const ViewContact = () => {
-    const { setFilteredContacts, setInputValue } = useContext(MainContext);
+    const { setFilteredContacts, setInputValue, setCurrPage } =
+        useContext(MainContext);
     const { contactId } = useParams();
     const [loading, setLoading] = useState(false);
     const [contactInfo, setContactInfo] = useState(null);
@@ -46,6 +47,7 @@ const ViewContact = () => {
             handleSetLastVisitedContacts(response?.data);
             setFilteredContacts([]);
             setInputValue("");
+            setCurrPage(1);
             setLoading(false);
         };
         getContactInfo();
