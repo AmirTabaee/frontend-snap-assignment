@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
-import files from "../../../helpers/files";
-import { lang } from "../../../locale/lang";
+import files from "../../helpers/files";
+import { lang } from "../../locale/lang";
 import classes from "./ViewContact.module.scss";
-import { generateContactMockItems } from "../../../mock/contact";
-import { Spinner } from "../..";
-import { ContactApi } from "../../../services/contactServices";
+import { generateContactMockItems } from "../../mock/contact";
+import { Spinner } from "../../components";
+import { ContactApi } from "../../services/contactServices";
+import { MainContext } from "../../context/MainContextProvider";
 
 const ViewContact = () => {
+    const { setFilteredContacts, setInputValue } = useContext(MainContext);
     const { contactId } = useParams();
     const [loading, setLoading] = useState(false);
     const [contactInfo, setContactInfo] = useState(null);
@@ -42,6 +44,8 @@ const ViewContact = () => {
             setContactInfo(response?.data);
             setContactInfoArray(generateContactMockItems(lang, response?.data));
             handleSetLastVisitedContacts(response?.data);
+            setFilteredContacts([]);
+            setInputValue("");
             setLoading(false);
         };
         getContactInfo();

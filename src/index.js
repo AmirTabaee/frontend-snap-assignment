@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 import App from "./App";
 import { ErrorBoundary } from "./components";
+import { MainContextProvider } from "./context/MainContextProvider";
 
 const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container);
@@ -17,7 +18,9 @@ root.render(
         <ErrorBoundary>
             <ToastContainer />
             <HelmetProvider>
-                <App />
+                <MainContextProvider>
+                    <App />
+                </MainContextProvider>
             </HelmetProvider>
         </ErrorBoundary>
     </BrowserRouter>
