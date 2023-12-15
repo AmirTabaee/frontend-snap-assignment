@@ -14,7 +14,9 @@ import { MainContext } from "../../context/MainContextProvider";
 const ViewContact = () => {
     const { setFilteredContacts, setInputValue, setCurrPage } =
         useContext(MainContext);
+
     const { contactId } = useParams();
+
     const [loading, setLoading] = useState(false);
     const [contactInfo, setContactInfo] = useState(null);
     const [contactInfoArray, setContactInfoArray] = useState([]);

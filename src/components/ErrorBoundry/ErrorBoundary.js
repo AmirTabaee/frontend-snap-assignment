@@ -18,15 +18,14 @@ class ErrorBoundary extends Component {
         if (this.state.hasError) {
             return (
                 <div className={`text-center py-5 ${classes.card_currentLine}`}>
-                    {/* <p className={`h3 ${classes.text_orange}`}>
+                    <p className={`h3 ${classes.text_orange}`}>
                         {lang.somethingWentWrongPleaseTryAgain}
                     </p>
                     <img
                         src={files.gif.NotFound}
                         alt="Not found"
                         className="w-25"
-                    /> */}
-                    amir
+                    />
                 </div>
             );
         }

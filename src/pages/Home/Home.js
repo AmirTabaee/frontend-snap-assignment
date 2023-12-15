@@ -1,3 +1,5 @@
+import { useContext, useEffect, useState } from "react";
+
 import { Helmet } from "react-helmet-async";
 
 import files from "../../helpers/files";
@@ -5,7 +7,6 @@ import { lang } from "../../locale/lang";
 import classes from "./Home.module.scss";
 import MainLayout from "../../layout/MainLayout";
 import { Contact, Spinner } from "../../components";
-import { useContext, useEffect, useState } from "react";
 import { ContactApi } from "../../services/contactServices";
 import { MainContext } from "../../context/MainContextProvider";
 
@@ -16,22 +17,20 @@ const Home = () => {
             inputValue,
             filteredContacts,
             currPage,
+            fetchDataLoading,
         },
         setScrollLoading,
+        setFetchDataLoading,
     } = useContext(MainContext);
 
     const visitedContactsList = JSON.parse(
         localStorage.getItem("visitedContactsList")
     );
 
-    const [fetchDataLoading, setFetchDataLoading] = useState(false);
-
+    // const [fetchDataLoading, setFetchDataLoading] = useState(false);
     const [prevPage, setPrevPage] = useState(0);
     const [userList, setUserList] = useState([]);
     const [lastList, setLastList] = useState(false);
-
-    console.log("filteredContacts", filteredContacts);
-    console.log("userList", userList);
 
     const fetchData = async (clearList = false) => {
         setFetchDataLoading(scrollLoading ? false : true);
